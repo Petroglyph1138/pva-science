@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Is a Star? Explore</title>
+<style>
+:root{--page:#F5F7FA;--card:#FFFFFF;--ink:#1C2733;--soft:#5B6B7B;--line:#E3E8EE;--accent:#E8590C;--accent-soft:#FFF1E8;--blue:#1C7ED6;--space:#0B1B2B;--ok:#2F9E44}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--page);color:var(--ink);font:16px/1.55 "Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif}
+header{background:var(--card);border-bottom:1px solid var(--line);padding:20px 16px 0}
+.inner{max-width:1120px;margin:0 auto}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{margin:4px 0 2px;font-size:30px;line-height:1.15;font-weight:750;letter-spacing:-.01em}
+.sub{color:var(--soft);font-size:15px;margin-bottom:14px}
+nav{display:flex;flex-wrap:wrap;gap:4px 2px}
+nav button{flex:0 0 auto;background:none;border:0;border-bottom:3px solid transparent;color:var(--soft);padding:12px 14px 11px;font-family:inherit;font-size:15px;font-weight:600;line-height:1;cursor:pointer;white-space:nowrap}
+nav button:hover{color:var(--ink)}
+nav button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--accent)}
+nav button .n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--line);color:var(--soft);font-size:12px;margin-right:8px}
+nav button[aria-selected=true] .n{background:var(--accent);color:#fff}
+/* narrower windows: tabs become a grid of buttons that always fits, wrapping to as many rows as needed */
+@media (max-width:1000px){
+  header{padding-bottom:14px}
+  nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
+  nav button{white-space:normal;text-align:left;line-height:1.25;display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--page)}
+  nav button .n{flex:0 0 22px}
+  nav button[aria-selected=true]{background:var(--accent-soft);border-color:var(--accent);color:var(--ink)}
+}
+@media (max-width:420px){ nav{grid-template-columns:1fr 1fr} nav button{font-size:14px;padding:9px 10px} }
+main{padding:20px 16px 40px}
+section{display:none} section.on{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.wrap{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:820px){.wrap{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 1px 2px rgba(16,24,40,.04),0 6px 18px rgba(16,24,40,.06)}
+.panel h2{margin:0 0 6px;font-size:19px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:620px){.pair{grid-template-columns:1fr}}
+figure{margin:0}
+figcaption{font-size:14px;font-weight:600;color:var(--soft);text-align:center;margin-top:8px}
+canvas{width:100%;height:auto;display:block;background:var(--space);border-radius:12px;touch-action:none}
+label{display:block;margin:14px 0 6px;font-weight:650;font-size:14px;color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--accent);height:28px}
+.readout{display:inline-block;font-variant-numeric:tabular-nums;font-size:20px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:10px;padding:6px 12px;margin:12px 0 4px}
+.status{font-size:16px;color:var(--ink);min-height:3em;margin:8px 0}
+.think{border:1px solid var(--line);border-left:4px solid var(--blue);padding:10px 14px;background:#F8FBFF;border-radius:10px;margin-top:14px;font-size:15px}
+.think b{color:var(--blue)}
+button.act{background:var(--ink);color:#fff;border:0;border-radius:10px;padding:9px 16px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;margin-top:6px}
+button.act:hover{background:#2C3A49}
+.scale{display:flex;justify-content:space-between;font-size:13px;color:var(--soft);margin-top:-2px}
+.toggle{display:flex;align-items:center;gap:10px;margin-top:12px;font-weight:600;font-size:14px}
+.toggle input{width:18px;height:18px;accent-color:var(--accent)}
+small{display:block;color:var(--soft);font-size:13px;margin-top:12px}
+:focus-visible{outline:3px solid #74C0FC;outline-offset:2px;border-radius:6px}
+</style>
+</head>
+<body>
+<header><div class="inner">
+  <div class="eyebrow">Grade 6 Science · Chapter 20 · Lesson 1</div>
+  <h1>What Is a Star?</h1>
+  <div class="sub">Explore six models. Try each one, then answer the question under it in your notes.</div>
+  <nav role="tablist">
+    <button role="tab" aria-selected="true" data-t="t1"><span class="n">1</span>Gravity gathers a cloud</button>
+    <button role="tab" aria-selected="false" data-t="t2"><span class="n">2</span>Fusion in the core</button>
+    <button role="tab" aria-selected="false" data-t="t3"><span class="n">3</span>A balancing act</button>
+    <button role="tab" aria-selected="false" data-t="t4"><span class="n">4</span>Why stars twinkle</button>
+    <button role="tab" aria-selected="false" data-t="t5"><span class="n">5</span>Star or planet?</button>
+    <button role="tab" aria-selected="false" data-t="t6"><span class="n">6</span>Near and far</button>
+  </nav>
+</div></header>
+<main><div class="inner">
+<!-- 1 -->
+<section id="t1" class="on">
+ <div class="wrap">
+  <div class="panel"><canvas id="c1" width="600" height="440" aria-label="A cloud of gas and dust pulled together by gravity"></canvas></div>
+  <div class="panel">
+   <h2>Gravity gathers a cloud</h2>
+   <label for="s1">Time (move the slider)</label>
+   <input id="s1" type="range" min="0" max="100" value="0">
+   <div class="readout" id="r1">Core: about −260 °C</div>
+   <div class="status" id="st1">A huge, cold cloud of gas and dust. Most of the gas is hydrogen.</div>
+   <div class="think"><b>Think:</b> What pulls the gas and dust together? What happens to the center as the clump gets squeezed? At what point does the protostar become a true star?</div>
+   <small>Model, not to scale. Real stars take hundreds of thousands of years to form.</small>
+  </div>
+ </div>
+</section>
+<!-- 2 -->
+<section id="t2">
+ <div class="wrap">
+  <div class="panel"><canvas id="c2" width="600" height="440" aria-label="The core of a star with hydrogen atoms to drag into the fusion zone"></canvas></div>
+  <div class="panel">
+   <h2>Fusion in the core</h2>
+   <div class="status" id="st2">Drag hydrogen atoms (H) into the glowing fusion zone. When four hydrogen atoms join, they make one helium atom (He), which stays in the core.</div>
+   <div class="readout" id="r2">Helium made: 0 · Energy bursts: 0</div>
+   <button class="act" id="b2">Reset</button>
+   <div class="think"><b>Think:</b> Why does it take more than one hydrogen atom to make one helium atom? Where does a star's light and heat come from? (Key Fact 3)</div>
+   <small>In real stars, four hydrogen nuclei end up as one helium nucleus. The reading's picture shows two to keep it simple. Each joining really does give off a tiny burst of energy, but a real core has trillions of them every second, so it shines steadily instead of flashing. The flash here shows one joining up close. The new helium stays in the core and slowly builds up there, just as it does in the Sun.</small>
+  </div>
+ </div>
+</section>
+<!-- 3 -->
+<section id="t3">
+ <div class="wrap">
+  <div class="panel"><canvas id="c3" width="600" height="440" aria-label="A star with gravity arrows pointing in and fusion arrows pointing out"></canvas></div>
+  <div class="panel">
+   <h2>A balancing act</h2>
+   <label for="g3">Gravity pulling in</label><input id="g3" type="range" min="1" max="10" value="5">
+   <label for="f3">Energy from fusion pushing out</label><input id="f3" type="range" min="1" max="10" value="5">
+   <div class="status" id="st3">Balanced: the star keeps its round shape and shines steadily.</div>
+   <div class="think"><b>Think:</b> What happens when gravity is stronger than the push from fusion? What happens when the push is stronger? (Key Fact 4)</div>
+  </div>
+ </div>
+</section>
+<!-- 4 -->
+<section id="t4">
+ <div class="panel">
+  <div class="pair">
+   <figure><canvas id="c6" width="420" height="420" aria-label="Starlight bending as it passes through moving air on its way to your eye"></canvas><figcaption>Through the air: the light bends this way and that</figcaption></figure>
+   <figure><canvas id="c7" width="420" height="420" aria-label="What you see when you look up: the star twinkles"></canvas><figcaption>What you see when you look up</figcaption></figure>
+  </div>
+  <label for="air6">How stirred up is the air?</label>
+  <input id="air6" type="range" min="0" max="10" value="5" aria-describedby="air6v">
+  <div class="scale"><span>calm</span><span>breezy</span><span>windy</span></div>
+  <div class="readout" id="air6v">Air: breezy</div>
+ </div>
+ <div class="panel" style="margin-top:20px">
+  <h2>Why do stars twinkle?</h2>
+  <div class="status">Starlight has to pass through Earth's air before it reaches your eyes. The air is always moving, and moving air bends the light a little this way and that. A star is so far away that its light comes from one tiny point, so each bend makes it flicker. The more stirred up the air, the harder and faster a star twinkles.</div>
+  <div class="think"><b>Think:</b> Watch both sides at the same time. What happens on the right each time the light bends on the left? Move the slider from calm to windy. How does the twinkling change, and why?</div>
+ </div>
+</section>
+<!-- 5 -->
+<section id="t5">
+ <div class="wrap">
+  <div class="panel"><canvas id="c4" width="600" height="300" aria-label="A star and a planet in the night sky: the star twinkles and the planet stays steady"></canvas>
+   <label for="air4">How stirred up is the air?</label>
+   <input id="air4" type="range" min="0" max="10" value="5">
+   <div class="scale"><span>calm</span><span>breezy</span><span>windy</span></div>
+   <div class="readout" id="air4v">Air: breezy</div>
+  </div>
+  <div class="panel">
+   <h2>Star or planet?</h2>
+   <div class="status">The star's light comes from one tiny point, so moving air makes it flicker. The planet's light comes from a tiny disk, so it stays steady.</div>
+   <div class="think"><b>Think:</b> Move the slider from calm to windy. Which one twinkles more as the air gets rougher? How did Noor's cousin know the steady dot was a planet?</div>
+  </div>
+ </div>
+ </section>
+<!-- 6 -->
+<section id="t6">
+ <div class="wrap">
+  <div class="panel"><canvas id="c5" width="600" height="300" aria-label="A giant star and a Sun-like star at different distances"></canvas></div>
+  <div class="panel">
+   <h2>Near and far</h2>
+   <label for="d5">Move the giant star farther away</label><input id="d5" type="range" min="1" max="300" value="1">
+   <div class="readout" id="r5">Giant: 1× as far as the Sun-like star</div>
+   <div class="status" id="st5">Close up, the giant star looks much brighter.</div>
+   <div class="think"><b>Think:</b> The giant is 100 times wider than the Sun-like star. Why can it look dimmer? Why does our Sun look bigger and brighter than every other star? (Key Fact 1)</div>
+   <small>Model: both stars have the same surface temperature, so the giant gives off 10,000 times as much light. Brightness drops with the square of the distance, as real starlight does, so the two match at 100 times as far.</small>
+  </div>
+ </div>
+</section>
+</div></main>
+<script>
+"use strict";
+const $ = (id) => document.getElementById(id);
+const COL = {bg:"#0B1B2B", head:"#D9F2E6", muted:"#9CC0B0", sun:"#FFD66B", hot:"#FF6B3D", blue:"#6EC1E4", accent:"#FF8C42", dust:"#9FB8AD"};
+// tabs
+let active = "t1";
+document.querySelectorAll("nav button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll("nav button").forEach(x => x.setAttribute("aria-selected", x === b));
+  document.querySelectorAll("section").forEach(s => s.classList.toggle("on", s.id === b.dataset.t));
+  active = b.dataset.t;
+}));
+function rng(seed){ let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
+function glow(ctx, x, y, r, color, a){ const g = ctx.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, color); g.addColorStop(1, "rgba(0,0,0,0)"); ctx.globalAlpha = a; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill(); ctx.globalAlpha = 1; }
+function canvasPoint(cv, e){ const r = cv.getBoundingClientRect(); return {x:(e.clientX - r.left) * cv.width / r.width, y:(e.clientY - r.top) * cv.height / r.height}; }
+
+// ---------- 1. Gravity gathers a cloud ----------
+const c1 = $("c1"), x1 = c1.getContext("2d"), R1 = rng(7);
+const parts = Array.from({length: 260}, () => { const a = R1() * 6.283, d = 40 + R1() * 200; return {a, d, s: 1 + R1() * 2.2, w: (R1() - .5) * .002}; });
+function draw1(t){
+  const p = +$("s1").value / 100, cx = 300, cy = 220;
+  x1.fillStyle = COL.bg; x1.fillRect(0, 0, 600, 440);
+  const shrink = 1 - 0.82 * Math.pow(p, 0.8);
+  const heat = Math.pow(p, 2.2);              // 0..1
+  const coreC = -260 + heat * 15e6;           // up to about 15 million °C
+  const fusion = coreC >= 1e7;
+  if (p > .15) glow(x1, cx, cy, 30 + 120 * heat, fusion ? COL.sun : COL.hot, .25 + .6 * heat);
+  parts.forEach(q => { q.a += q.w * (1 + 4 * p); const d = q.d * shrink;
+    x1.fillStyle = p > .55 ? "rgba(255,214,107,.75)" : COL.dust;
+    x1.beginPath(); x1.arc(cx + Math.cos(q.a) * d, cy + Math.sin(q.a) * d, q.s, 0, 7); x1.fill(); });
+  if (p < .9) for (let i = 0; i < 10; i++) { const a = i * .628 + t / 4000, r0 = 210 * shrink + 18, r1 = 150 * shrink + 10;
+    x1.strokeStyle = COL.blue; x1.lineWidth = 3; x1.beginPath(); x1.moveTo(cx + Math.cos(a) * r0, cy + Math.sin(a) * r0); x1.lineTo(cx + Math.cos(a) * r1, cy + Math.sin(a) * r1); x1.stroke();
+    const hx = cx + Math.cos(a) * r1, hy = cy + Math.sin(a) * r1; x1.beginPath(); x1.moveTo(hx, hy); x1.lineTo(hx + Math.cos(a + 2.6) * 10, hy + Math.sin(a + 2.6) * 10); x1.lineTo(hx + Math.cos(a - 2.6) * 10, hy + Math.sin(a - 2.6) * 10); x1.fillStyle = COL.blue; x1.fill(); }
+  if (fusion) { x1.fillStyle = COL.sun; x1.beginPath(); x1.arc(cx, cy, 38, 0, 7); x1.fill();
+    for (let i = 0; i < 16; i++) { const a = i * .3927 + t / 1500; x1.strokeStyle = COL.sun; x1.lineWidth = 3; x1.beginPath(); x1.moveTo(cx + Math.cos(a) * 48, cy + Math.sin(a) * 48); x1.lineTo(cx + Math.cos(a) * 70, cy + Math.sin(a) * 70); x1.stroke(); } }
+  x1.fillStyle = COL.blue; x1.font = "bold 18px \"Segoe UI\", Inter, Roboto, Arial, sans-serif"; x1.textAlign = "left"; if (p < .9) x1.fillText("gravity pulls in", 14, 26);
+  $("r1").textContent = "Core: about " + (coreC < 1000 ? Math.round(coreC) + " °C" : (coreC / 1e6).toFixed(coreC < 1e6 ? 2 : 1) + " million °C");
+  $("st1").textContent = p < .15 ? "A huge, cold cloud of gas and dust. Most of the gas is hydrogen."
+    : !fusion && p < .55 ? "Gravity pulls the gas and dust into a clump. The clump is squeezed and gets hotter."
+    : !fusion ? "A protostar: still squeezing together and heating up. No fusion yet."
+    : "The core passed about 10 million °C. Hydrogen is fusing, so the protostar has become a true star!";
+}
+
+// ---------- 2. Fusion ----------
+const c2 = $("c2"), x2 = c2.getContext("2d");
+let atoms = [], made = 0, bursts = [], drag = null, inZone = 0;
+const ZONE = {x: 300, y: 220, r: 70};
+function reset2(){ const R = rng(3); atoms = Array.from({length: 12}, (_, i) => { const a = i * .5236, d = 150 + R() * 40; return {x: 300 + Math.cos(a) * d, y: 220 + Math.sin(a) * d * .85, vx: (R() - .5) * .4, vy: (R() - .5) * .4, inz: false}; }); made = 0; bursts = []; update2(); }
+function update2(){ $("r2").textContent = "Helium made: " + made + " · Energy bursts: " + made; }
+c2.addEventListener("pointerdown", e => { const p = canvasPoint(c2, e); drag = atoms.find(a => !a.inz && Math.hypot(a.x - p.x, a.y - p.y) < 22) || null; if (drag) c2.setPointerCapture(e.pointerId); });
+c2.addEventListener("pointermove", e => { if (!drag) return; const p = canvasPoint(c2, e); drag.x = p.x; drag.y = p.y; });
+c2.addEventListener("pointerup", () => { if (!drag) return;
+  if (Math.hypot(drag.x - ZONE.x, drag.y - ZONE.y) < ZONE.r) { drag.inz = true; const z = atoms.filter(a => a.inz);
+    z.forEach((a, i) => { a.x = ZONE.x + Math.cos(i * 1.57 + .785) * 50; a.y = ZONE.y + Math.sin(i * 1.57 + .785) * 50; });
+    if (z.length === 4) { atoms = atoms.filter(a => !a.inz); made++; bursts.push({t: performance.now()}); update2();
+      $("st2").textContent = made === 3 ? "Every helium atom you made released a burst of energy. That energy leaves the star as light and heat." : "Four hydrogen atoms joined into one helium atom and released energy. Try again!";
+      if (atoms.length < 4) setTimeout(reset2, 2500); }
+    else $("st2").textContent = "Hydrogen in the zone: " + z.length + " of 4. Keep going.";
+  }
+  drag = null; });
+$("b2").addEventListener("click", () => { reset2(); $("st2").textContent = "Drag hydrogen atoms (H) into the glowing fusion zone."; });
+function atom(ctx, x, y, r, col, txt){ ctx.fillStyle = col; ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill(); ctx.fillStyle = "#10302A"; ctx.font = "bold " + Math.round(r * .9) + "px \"Segoe UI\", Inter, Roboto, Arial, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(txt, x, y + 1); }
+function draw2(t){
+  x2.fillStyle = COL.bg; x2.fillRect(0, 0, 600, 440);
+  glow(x2, ZONE.x, ZONE.y, 110, COL.hot, .55); x2.strokeStyle = COL.accent; x2.setLineDash([6, 6]); x2.lineWidth = 2; x2.beginPath(); x2.arc(ZONE.x, ZONE.y, ZONE.r, 0, 7); x2.stroke(); x2.setLineDash([]);
+  x2.fillStyle = COL.head; x2.font = "bold 16px \"Segoe UI\", Inter, Roboto, Arial, sans-serif"; x2.textAlign = "center"; x2.fillText("fusion zone (the core)", ZONE.x, ZONE.y - ZONE.r - 10);
+  atoms.forEach(a => { if (!a.inz && a !== drag) { a.x += a.vx; a.y += a.vy; if (a.x < 20 || a.x > 580) a.vx *= -1; if (a.y < 20 || a.y > 420) a.vy *= -1; } atom(x2, a.x, a.y, 17, COL.blue, "H"); });
+  bursts = bursts.filter(b => t - b.t < 1400);
+  // the flash: a bright burst at the spot where the atoms joined, fading in about half a second
+  bursts.forEach(b => { const k = (t - b.t) / 500; if (k < 1) { const e = 1 - k;
+    glow(x2, ZONE.x, ZONE.y, 60 + 140 * k, "#FFFFFF", .95 * e); glow(x2, ZONE.x, ZONE.y, 90 + 160 * k, COL.sun, .7 * e);
+    x2.fillStyle = "rgba(255,255,255," + e + ")"; x2.font = "bold 18px \"Segoe UI\", Inter, Roboto, Arial, sans-serif"; x2.textAlign = "center"; x2.fillText("energy released!", ZONE.x, ZONE.y + ZONE.r + 34); } });
+  // the helium stays in the core and builds up there (as it does in the Sun); drawn after the flash fades
+  const HE = [[0,0],[-30,-14],[30,-14],[0,32],[-30,22],[30,22],[0,-34],[-44,6],[44,6]];
+  for (let i = 0; i < made; i++) { const age = bursts.length && i === made - 1 ? (t - bursts[bursts.length - 1].t) / 500 : 1;
+    if (age < 1) x2.globalAlpha = Math.max(0, age); const [dx, dy] = HE[i % HE.length]; atom(x2, ZONE.x + dx, ZONE.y + dy, 15, COL.hot, "He"); x2.globalAlpha = 1; }
+  bursts.forEach(b => { const k = (t - b.t) / 1400; for (let i = 0; i < 18; i++) { const a = i * .349; x2.strokeStyle = "rgba(255,214,107," + (1 - k) + ")"; x2.lineWidth = 4; x2.beginPath(); x2.moveTo(ZONE.x + Math.cos(a) * (40 + 200 * k), ZONE.y + Math.sin(a) * (40 + 200 * k)); x2.lineTo(ZONE.x + Math.cos(a) * (70 + 200 * k), ZONE.y + Math.sin(a) * (70 + 200 * k)); x2.stroke(); } });
+}
+
+// ---------- 3. Balancing act ----------
+const c3 = $("c3"), x3 = c3.getContext("2d"); let rad = 110;
+function draw3(t){
+  const g = +$("g3").value, f = +$("f3").value, target = Math.max(28, Math.min(190, 110 * Math.pow(f / g, 1.1)));
+  rad += (target - rad) * .04;
+  x3.fillStyle = COL.bg; x3.fillRect(0, 0, 600, 440); const cx = 300, cy = 220;
+  glow(x3, cx, cy, rad * 1.35, COL.sun, .35); x3.fillStyle = COL.sun; x3.beginPath(); x3.arc(cx, cy, rad, 0, 7); x3.fill();
+  x3.fillStyle = COL.hot; x3.beginPath(); x3.arc(cx, cy, Math.min(34, rad * .35), 0, 7); x3.fill();
+  const arr = (a, r0, r1, col, w) => { x3.strokeStyle = col; x3.fillStyle = col; x3.lineWidth = w; x3.beginPath(); x3.moveTo(cx + Math.cos(a) * r0, cy + Math.sin(a) * r0); x3.lineTo(cx + Math.cos(a) * r1, cy + Math.sin(a) * r1); x3.stroke();
+    const hx = cx + Math.cos(a) * r1, hy = cy + Math.sin(a) * r1, d = r1 > r0 ? 1 : -1; x3.beginPath(); x3.moveTo(hx + Math.cos(a) * 9 * d, hy + Math.sin(a) * 9 * d); x3.lineTo(hx + Math.cos(a + 1.57) * 7, hy + Math.sin(a + 1.57) * 7); x3.lineTo(hx + Math.cos(a - 1.57) * 7, hy + Math.sin(a - 1.57) * 7); x3.fill(); };
+  for (let i = 0; i < 8; i++) { const a = i * .785; arr(a, rad + 18 + g * 7, rad + 10, COL.blue, 2 + g * .5); arr(a + .39, Math.min(34, rad * .35) + 4, Math.min(34, rad * .35) + 8 + f * 6, COL.accent, 2 + f * .5); }
+  x3.font = "bold 17px \"Segoe UI\", Inter, Roboto, Arial, sans-serif"; x3.textAlign = "left"; x3.fillStyle = COL.blue; x3.fillText("gravity pulls in", 12, 24); x3.fillStyle = COL.accent; x3.fillText("energy from fusion pushes out", 12, 428);
+  $("st3").textContent = Math.abs(g - f) <= 1 ? "Balanced: the star keeps its round shape and shines steadily."
+    : g > f ? "Gravity is winning: the star is pulled in on itself and shrinks." : "The push from fusion is winning: the star puffs out and gets bigger.";
+}
+
+// ---------- 5. Star or planet ----------
+const c4 = $("c4"), x4 = c4.getContext("2d");
+const R4 = rng(23), bg4 = Array.from({length: 60}, () => ({x: R4() * 600, y: R4() * 230, r: .4 + R4() * 1.1, p: R4() * 6.28, f: .5 + R4()}));
+let ph4 = 0, last4 = 0;    // same air slider idea as tab 4: more stirred-up air = faster, stronger flicker
+function draw4(t){
+  const lvl = +$("air4").value, dt = last4 ? Math.min(50, t - last4) : 16; last4 = t; ph4 += dt * (0.25 + lvl * 0.22); const T = ph4;
+  $("air4v").textContent = "Air: " + (lvl === 0 ? "calm, no moving air" : lvl <= 3 ? "light breeze" : lvl <= 7 ? "breezy" : "windy, very stirred up");
+  x4.fillStyle = "#06101C"; x4.fillRect(0, 0, 600, 300);
+  bg4.forEach(b => { const tw = lvl ? 1 - lvl / 14 * (.5 + .5 * Math.sin(T / 160 * b.f + b.p)) : .9; x4.fillStyle = "rgba(230,240,255," + (.35 * tw + .1) + ")"; x4.beginPath(); x4.arc(b.x, b.y, b.r, 0, 7); x4.fill(); });
+  // star: a tiny point, so every bend of the light changes what reaches your eye
+  const k = lvl / 10, w = wob(T, 1) * .5 + wob(T, 4.2) * .5;
+  const sb = Math.max(.15, 1 - k * (.55 + .45 * w));
+  const hue = lvl ? ["#FFF3D6", "#D6E8FF", "#FFE0C2", "#FFFFFF"][Math.floor((T / 90) % 4)] : "#FFF3D6";
+  glow(x4, 150, 110, 30 * sb + 8, hue, sb); x4.fillStyle = hue; x4.beginPath(); x4.arc(150, 110, 2.5 + 2 * sb, 0, 7); x4.fill();
+  if (sb > .6) { x4.strokeStyle = "rgba(255,246,218," + (sb - .5) + ")"; x4.lineWidth = 1.5; x4.beginPath(); x4.moveTo(150 - 24 * sb, 110); x4.lineTo(150 + 24 * sb, 110); x4.moveTo(150, 110 - 24 * sb); x4.lineTo(150, 110 + 24 * sb); x4.stroke(); }
+  // planet: a tiny disk, so the bends average out and it stays steady (a slight shimmer only when the air is very rough)
+  const pb = 1 - (lvl >= 9 ? .05 * (1 + wob(T, 2.7)) : 0);
+  glow(x4, 450, 110, 26, "#BFE3F5", .4 * pb); x4.fillStyle = "rgba(205,232,248," + pb + ")"; x4.beginPath(); x4.arc(450, 110, 7, 0, 7); x4.fill();
+  x4.fillStyle = "#0B1622"; x4.beginPath(); x4.moveTo(0, 300); x4.lineTo(0, 240); for (let xx = 0; xx <= 600; xx += 30) x4.lineTo(xx, 236 + Math.sin(xx / 60) * 8 + (xx % 90 ? 0 : -10)); x4.lineTo(600, 300); x4.fill();
+  x4.font = "bold 16px \"Segoe UI\", Inter, Roboto, Arial, sans-serif"; x4.textAlign = "center";
+  x4.fillStyle = COL.head; x4.fillText("star (a tiny point)", 150, 175); x4.fillText("planet (a tiny disk)", 450, 175);
+  x4.fillStyle = COL.accent; x4.fillText(lvl ? "twinkles" : "steady", 150, 280); x4.fillText(lvl >= 9 ? "mostly steady" : "steady", 450, 280);
+}
+// ---------- 4. Why stars twinkle: the light path (left) and the view from the ground (right), driven by the same wobble ----------
+const c6 = $("c6"), x6 = c6.getContext("2d"), c7 = $("c7"), x7 = c7.getContext("2d");
+const R7 = rng(11), bgStars = Array.from({length: 70}, () => ({x: R7() * 420, y: R7() * 300, r: .4 + R7() * 1.1, p: R7() * 6.28, f: .5 + R7()}));
+function wob(t, s){ return Math.sin(t / 113 + s) * .6 + Math.sin(t / 47 + s * 2.3) * .4; }
+let ph6 = 0, last6 = 0;    // twinkle clock: runs faster when the air is more stirred up
+function draw6(t){
+  const lvl = +$("air6").value, air = lvl > 0, a = Math.min(1.25, lvl / 6);   // bend size grows with the air
+  const dt = last6 ? Math.min(50, t - last6) : 16; last6 = t; ph6 += dt * (0.25 + lvl * 0.22);   // and so does the flicker rate
+  $("air6v").textContent = "Air: " + (lvl === 0 ? "calm, no moving air" : lvl <= 3 ? "light breeze" : lvl <= 7 ? "breezy" : "windy, very stirred up");
+  t = ph6;
+  // left: star at the top, eye at the bottom, light bending in each moving air layer
+  x6.fillStyle = COL.bg; x6.fillRect(0, 0, 420, 420);
+  const layers = [150, 205, 260, 315];
+  if (air) layers.forEach((y, k) => { x6.strokeStyle = "rgba(110,193,228," + (.08 + lvl * .025) + ")"; x6.lineWidth = 26; x6.beginPath();
+    for (let x = 0; x <= 420; x += 8) { const yy = y + Math.sin(x / 45 + t / 380 + k * 1.7) * 7; x ? x6.lineTo(x, yy) : x6.moveTo(x, yy); } x6.stroke(); });
+  glow(x6, 210, 50, 26, COL.sun, .9); x6.fillStyle = "#FFF6DA"; x6.beginPath(); x6.arc(210, 50, 4, 0, 7); x6.fill();
+  x6.fillStyle = COL.head; x6.font = "bold 15px \"Segoe UI\", Inter, Roboto, Arial, sans-serif"; x6.textAlign = "left"; x6.fillText("star (a tiny point)", 236, 55); x6.textAlign = "center";
+  let x = 210, y = 60; const pts = [[x, y]];
+  layers.concat([380]).forEach((ly, k) => { x = 210 + a * 26 * wob(t, k * 1.9); pts.push([x, ly]); });
+  const hit = Math.abs(pts[pts.length - 1][0] - 210);           // how far the light misses the eye
+  x6.strokeStyle = "rgba(255,214,107,.95)"; x6.lineWidth = 3; x6.beginPath(); pts.forEach(([px, py], i) => i ? x6.lineTo(px, py) : x6.moveTo(px, py)); x6.stroke();
+  x6.fillStyle = COL.head; x6.beginPath(); x6.ellipse(210, 392, 22, 11, 0, 0, 7); x6.fill(); x6.fillStyle = COL.bg; x6.beginPath(); x6.arc(210, 392, 6, 0, 7); x6.fill();
+  x6.fillStyle = COL.muted; x6.font = "13px \"Segoe UI\", Inter, Roboto, Arial, sans-serif"; x6.fillText("your eye", 280, 397); if (air) { x6.textAlign = "left"; x6.fillText("moving air", 12, 135); }
+  // right: the night sky as you see it; brightness and color jump when the light misses the eye
+  const b = air ? Math.max(.15, 1 - hit / 34) : 1;
+  x7.fillStyle = "#06101C"; x7.fillRect(0, 0, 420, 420);
+  bgStars.forEach(s => { const tw = air ? .55 + .45 * Math.sin(t / 160 * s.f + s.p) : .9; x7.fillStyle = "rgba(230,240,255," + (.35 * tw + .1) + ")"; x7.beginPath(); x7.arc(s.x, s.y, s.r, 0, 7); x7.fill(); });
+  const hue = air ? ["#FFF3D6", "#D6E8FF", "#FFE0C2", "#FFFFFF"][Math.floor((t / 90 + hit) % 4)] : "#FFF3D6";
+  glow(x7, 210, 150, 34 * b + 8, hue, b); x7.fillStyle = hue; x7.beginPath(); x7.arc(210, 150, 2.5 + 2 * b, 0, 7); x7.fill();
+  if (b > .6) { x7.strokeStyle = "rgba(255,246,218," + (b - .5) + ")"; x7.lineWidth = 1.5; x7.beginPath(); x7.moveTo(210 - 26 * b, 150); x7.lineTo(210 + 26 * b, 150); x7.moveTo(210, 150 - 26 * b); x7.lineTo(210, 150 + 26 * b); x7.stroke(); }
+  x7.fillStyle = "#0B1622"; x7.beginPath(); x7.moveTo(0, 420); x7.lineTo(0, 345); for (let xx = 0; xx <= 420; xx += 30) x7.lineTo(xx, 340 + Math.sin(xx / 50) * 10 + (xx % 90 ? 0 : -14)); x7.lineTo(420, 420); x7.fill();
+  x7.fillStyle = air ? COL.accent : COL.muted; x7.font = "bold 16px \"Segoe UI\", Inter, Roboto, Arial, sans-serif"; x7.textAlign = "center"; x7.fillText(air ? "twinkling" : "steady (no moving air)", 210, 395);
+}
+// ---------- 5b. Near and far ----------
+const c5 = $("c5"), x5 = c5.getContext("2d");
+function draw5(){
+  const d = +$("d5").value; x5.fillStyle = COL.bg; x5.fillRect(0, 0, 600, 300);
+  const bSun = 1, bGiant = 1e4 / (d * d);   // giant 100x wider (same surface temperature) -> 10,000x the light; dims with distance squared
+  const show = (x, b, label) => { const r = Math.max(2, Math.min(60, 8 * Math.pow(b, .25))); glow(x5, x, 140, r * 2.2, COL.sun, Math.min(1, .3 + .7 * Math.min(b, 1))); x5.fillStyle = "rgba(255,240,200," + Math.min(1, .25 + Math.min(b, 1)) + ")"; x5.beginPath(); x5.arc(x, 140, Math.max(1.5, r * .25), 0, 7); x5.fill();
+    x5.fillStyle = COL.head; x5.font = "bold 17px \"Segoe UI\", Inter, Roboto, Arial, sans-serif"; x5.textAlign = "center"; x5.fillText(label, x, 270); };
+  show(160, bSun * 1.0, "Sun-like star"); show(440, bGiant, "giant star (100× wider)");
+  $("r5").textContent = "Giant: " + d + "× as far as the Sun-like star";
+  $("st5").textContent = bGiant > 1.3 ? "The giant looks brighter, because it is close enough." : bGiant > .77 ? "About the same brightness: the giant's size and its distance cancel out." : "The giant now looks dimmer, even though it is 100 times wider. Distance matters as well as size.";
+}
+["s1", "g3", "f3", "d5"].forEach(id => $(id).addEventListener("input", () => { if (id === "d5") draw5(); }));
+reset2(); draw5();
+function loop(t){ if (active === "t1") draw1(t); if (active === "t2") draw2(t); if (active === "t3") draw3(t); if (active === "t4") draw6(t); if (active === "t5") draw4(t); requestAnimationFrame(loop); }
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
