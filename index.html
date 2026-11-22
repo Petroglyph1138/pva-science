@@ -1,1 +1,347 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Science Explorers</title><style>body{margin:0;background:#F5F7FA;color:#1C2733;font:17px/1.5 "Segoe UI",Inter,Roboto,Arial,sans-serif}main{max-width:720px;margin:0 auto;padding:40px 16px}h1{font-size:30px;margin:0 0 6px}p{color:#5B6B7B}a.card{display:block;background:#fff;border:1px solid #E3E8EE;border-radius:14px;padding:16px 18px;margin-top:14px;color:#1C2733;text-decoration:none;box-shadow:0 4px 14px rgba(16,24,40,.06)}a.card:hover{border-color:#E8590C}a.card b{color:#E8590C}</style></head><body><main><h1>Science Explorers</h1><p>Interactive models for our science lessons. Pick a lesson.</p><a class="card" href="ch20-l1/"><b>Grade 6 · Chapter 20 · Lesson 1</b><br>What Is a Star?</a></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motion and Reference Points Explore</title>
+<style>
+:root{--page:#F5F7FA;--card:#FFFFFF;--ink:#1C2733;--soft:#5B6B7B;--line:#E3E8EE;--accent:#E8590C;--accent-soft:#FFF1E8;--blue:#1C7ED6;--space:#0B1B2B;--ok:#2F9E44}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--page);color:var(--ink);font:16px/1.55 "Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif}
+header{background:var(--card);border-bottom:1px solid var(--line);padding:20px 16px 0}
+.inner{max-width:1120px;margin:0 auto}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{margin:4px 0 2px;font-size:30px;line-height:1.15;font-weight:750;letter-spacing:-.01em}
+.sub{color:var(--soft);font-size:15px;margin-bottom:14px}
+nav{display:flex;flex-wrap:wrap;gap:4px 2px}
+nav button{flex:0 0 auto;background:none;border:0;border-bottom:3px solid transparent;color:var(--soft);padding:12px 14px 11px;font-family:inherit;font-size:15px;font-weight:600;line-height:1;cursor:pointer;white-space:nowrap}
+nav button:hover{color:var(--ink)}
+nav button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--accent)}
+nav button .n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--line);color:var(--soft);font-size:12px;margin-right:8px}
+nav button[aria-selected=true] .n{background:var(--accent);color:#fff}
+/* narrower windows: tabs become a grid of buttons that always fits, wrapping to as many rows as needed */
+@media (max-width:1000px){
+  header{padding-bottom:14px}
+  nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
+  nav button{white-space:normal;text-align:left;line-height:1.25;display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--page)}
+  nav button .n{flex:0 0 22px}
+  nav button[aria-selected=true]{background:var(--accent-soft);border-color:var(--accent);color:var(--ink)}
+}
+@media (max-width:420px){ nav{grid-template-columns:1fr 1fr} nav button{font-size:14px;padding:9px 10px} }
+main{padding:20px 16px 40px}
+section{display:none} section.on{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.wrap{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:820px){.wrap{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 1px 2px rgba(16,24,40,.04),0 6px 18px rgba(16,24,40,.06)}
+.panel h2{margin:0 0 6px;font-size:19px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:620px){.pair{grid-template-columns:1fr}}
+figure{margin:0}
+figcaption{font-size:14px;font-weight:600;color:var(--soft);text-align:center;margin-top:8px}
+canvas{width:100%;height:auto;display:block;background:var(--space);border-radius:12px;touch-action:none}
+label{display:block;margin:14px 0 6px;font-weight:650;font-size:14px;color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--accent);height:28px}
+.readout{display:inline-block;font-variant-numeric:tabular-nums;font-size:20px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:10px;padding:6px 12px;margin:12px 0 4px}
+.status{font-size:16px;color:var(--ink);min-height:3em;margin:8px 0}
+.think{border:1px solid var(--line);border-left:4px solid var(--blue);padding:10px 14px;background:#F8FBFF;border-radius:10px;margin-top:14px;font-size:15px}
+.think b{color:var(--blue)}
+button.act{background:var(--ink);color:#fff;border:0;border-radius:10px;padding:9px 16px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;margin-top:6px}
+button.act:hover{background:#2C3A49}
+.scale{display:flex;justify-content:space-between;font-size:13px;color:var(--soft);margin-top:-2px}
+.toggle{display:flex;align-items:center;gap:10px;margin-top:12px;font-weight:600;font-size:14px}
+.toggle input{width:18px;height:18px;accent-color:var(--accent)}
+small{display:block;color:var(--soft);font-size:13px;margin-top:12px}
+:focus-visible{outline:3px solid #74C0FC;outline-offset:2px;border-radius:6px}
+</style>
+<style>
+.seg{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 2px}
+.seg button{border:1px solid var(--line);background:var(--page);color:var(--ink);border-radius:999px;padding:8px 14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--accent-soft);border-color:var(--accent)}
+table.rel{width:100%;border-collapse:collapse;margin:10px 0 2px;font-size:15px}
+table.rel th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--soft);text-align:left;padding:4px 6px;border-bottom:1px solid var(--line)}
+table.rel td{padding:7px 6px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.mv{font-weight:700;color:var(--accent)} .st{font-weight:700;color:var(--ok)}
+canvas.day{background:#CFE8F7}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header><div class="inner">
+  <div class="eyebrow">Grade 8 Science · Chapter 9 · Lesson 1</div>
+  <h1>Motion and Reference Points</h1>
+  <div class="sub">Explore three models. Try each one, then answer the question under it in your notes.</div>
+  <nav role="tablist">
+    <button role="tab" aria-selected="true" data-t="t1"><span class="n">1</span>Side-by-side race cars</button>
+    <button role="tab" aria-selected="false" data-t="t2"><span class="n">2</span>The school bus window</button>
+    <button role="tab" aria-selected="false" data-t="t3"><span class="n">3</span>Choose a reference point</button>
+  </nav>
+</div></header>
+<main><div class="inner">
+<!-- 1 -->
+<section id="t1" class="on">
+ <div class="wrap">
+  <div class="panel"><canvas id="c1" class="day" width="600" height="380" aria-label="Two race cars side by side on a track, seen from above, with the pit wall at the top and trees at the bottom"></canvas>
+   <small style="margin-top:8px">Seen from above, in slow motion. The track repeats, so a car that leaves one side comes back on the other.</small></div>
+  <div class="panel">
+   <h2>Side-by-side race cars</h2>
+   <label>Whose view? (your frame of reference)</label>
+   <div class="seg" id="v1">
+    <button aria-pressed="true" data-v="pit">Pit crew</button>
+    <button aria-pressed="false" data-v="car1">Driver of Car 1</button>
+    <button aria-pressed="false" data-v="car2">Camera on Car 2</button>
+   </div>
+   <label for="s1">Car 2's speed (Car 1 stays at 310 km/h)</label>
+   <input id="s1" type="range" min="280" max="340" step="5" value="310">
+   <div class="readout" id="r1">Car 2: 310 km/h (193 mph)</div>
+   <table class="rel" aria-live="polite"><thead><tr><th id="h1">Compared with the pit crew…</th><th>Moving?</th></tr></thead><tbody id="tb1"></tbody></table>
+   <div class="status" id="st1"></div>
+   <div class="think"><b>Think:</b> Set both cars to 310 km/h. To the driver of Car 1, is Car 2 moving? Does the pit crew agree? Who is right, and what does that tell you about a reference point? (Key Fact 3)</div>
+  </div>
+ </div>
+</section>
+<!-- 2 -->
+<section id="t2">
+ <div class="wrap">
+  <div class="panel"><canvas id="c2" class="day" width="600" height="360" aria-label="A school bus on a street with a sidewalk, a bus stop sign and trees"></canvas>
+   <div class="row" style="margin-top:10px"><button class="act" id="p2">Pause</button><button class="act" id="b2">Start over</button></div></div>
+  <div class="panel">
+   <h2>The school bus window</h2>
+   <label>Where are you?</label>
+   <div class="seg" id="w2">
+    <button aria-pressed="true" data-v="in">In a seat on the bus</button>
+    <button aria-pressed="false" data-v="out">At the bus stop</button>
+   </div>
+   <label>Pick a reference point</label>
+   <div class="seg" id="ref2">
+    <button aria-pressed="true" data-v="friend">The friend next to the rider</button>
+    <button aria-pressed="false" data-v="seat">The seat in front</button>
+    <button aria-pressed="false" data-v="tree">A tree</button>
+    <button aria-pressed="false" data-v="sign">The bus stop sign</button>
+   </div>
+   <label for="s2" id="l2">Bus speed: 25 km/h (16 mph)</label>
+   <input id="s2" type="range" min="0" max="40" step="5" value="25">
+   <div class="readout" id="r2"></div>
+   <div class="status" id="st2"></div>
+   <div class="think"><b>Think:</b> The rider is not moving compared with the bus. What could the rider look at to tell the bus is moving? Fill in the "Who sees motion?" table for the bus from the sidewalk and from inside. (Key Facts 2 and 6)</div>
+  </div>
+ </div>
+</section>
+<!-- 3 -->
+<section id="t3">
+ <div class="wrap">
+  <div class="panel"><canvas id="c3" class="day" width="600" height="360" aria-label="A car pulling out of a driveway past a house and a tree while a truck drives by"></canvas>
+   <label for="s3">Time (move the slider, or press Play)</label>
+   <input id="s3" type="range" min="0" max="600" value="0">
+   <div class="row"><button class="act" id="p3">Play</button></div></div>
+  <div class="panel">
+   <h2>Choose a reference point</h2>
+   <div class="status" style="min-height:0">You are the driver, leaving home for the store. Pick a reference point and watch the distance.</div>
+   <div class="seg" id="ref3">
+    <button aria-pressed="true" data-v="house">The house</button>
+    <button aria-pressed="false" data-v="tree">The tree</button>
+    <button aria-pressed="false" data-v="pass">Your passenger</button>
+    <button aria-pressed="false" data-v="truck">A truck driving by</button>
+   </div>
+   <div class="readout" id="r3"></div>
+   <div class="status" id="st3"></div>
+   <div class="think"><b>Think:</b> How can you tell the car is moving? Why do trees and buildings make the best reference points, and why is the truck a poor one? (Key Facts 1 and 4)</div>
+   <small>Model, not to scale. A change in distance from a reference point that is not moving means a change in position: motion.</small>
+  </div>
+ </div>
+</section>
+</div></main>
+<script>
+"use strict";
+const $ = (id) => document.getElementById(id);
+const F = "\"Segoe UI\", Inter, Roboto, Arial, sans-serif";
+const C = {ink:"#1C2733", soft:"#5B6B7B", accent:"#E8590C", blue:"#1C7ED6", ok:"#2F9E44", grass:"#8CC56B", grass2:"#7DB85C", road:"#5E6670", tree:"#2F7D3A", tree2:"#3E9A48", trunk:"#7A5230", sky:"#CFE8F7"};
+let active = "t1";
+document.querySelectorAll("nav button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll("nav button").forEach(x => x.setAttribute("aria-selected", x === b));
+  document.querySelectorAll("section").forEach(s => s.classList.toggle("on", s.id === b.dataset.t));
+  active = b.dataset.t;
+}));
+function seg(id, onChange){ const g = $(id); let val = g.querySelector("[aria-pressed=true]").dataset.v;
+  g.querySelectorAll("button").forEach(b => b.addEventListener("click", () => { g.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); val = b.dataset.v; if (onChange) onChange(val); }));
+  return () => val; }
+const mod = (a, n) => ((a % n) + n) % n;
+const mph = (k) => Math.round(Math.abs(k) * 0.6214);
+function label(ctx, txt, x, y, col, size, align){ ctx.font = "bold " + (size || 14) + "px " + F; ctx.textAlign = align || "center"; const w = ctx.measureText(txt).width;
+  const bx = align === "left" ? x - 6 : x - w / 2 - 6; ctx.fillStyle = "rgba(255,255,255,.92)"; ctx.beginPath(); ctx.roundRect(bx, y - (size || 14) - 3, w + 12, (size || 14) + 9, 6); ctx.fill();
+  ctx.fillStyle = col || C.ink; ctx.fillText(txt, x, y); }
+function ring(ctx, x, y, r, col){ ctx.strokeStyle = col || C.accent; ctx.lineWidth = 3; ctx.setLineDash([6, 4]); ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.stroke(); ctx.setLineDash([]); }
+function treeTop(ctx, x, y, r){ ctx.fillStyle = C.tree; ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill(); ctx.fillStyle = C.tree2; ctx.beginPath(); ctx.arc(x - r * .3, y - r * .3, r * .55, 0, 7); ctx.fill(); }
+function treeSide(ctx, x, base, h){ ctx.fillStyle = C.trunk; ctx.fillRect(x - 5, base - h * .45, 10, h * .45); ctx.fillStyle = C.tree; ctx.beginPath(); ctx.arc(x, base - h * .62, h * .3, 0, 7); ctx.fill(); ctx.fillStyle = C.tree2; ctx.beginPath(); ctx.arc(x - h * .1, base - h * .7, h * .17, 0, 7); ctx.fill(); }
+
+// ---------- 1. Side-by-side race cars (top view) ----------
+const c1 = $("c1"), x1 = c1.getContext("2d"), W1 = 600, K1 = 0.8;  // K1: pixels per second for each km/h (slow motion)
+const view1 = seg("v1", () => { last1 = 0; });
+let s1 = 0, d1 = 0, last1 = 0;      // s1: Car 1's track position; d1: how far Car 2 is ahead of Car 1 (px)
+function f1car(ctx, x, y, body, num){
+  ctx.save(); ctx.translate(x, y);
+  ctx.fillStyle = "#1B1B1B"; [[-38, -22], [-38, 14], [30, -21], [30, 13]].forEach(([wx, wy]) => ctx.fillRect(wx, wy, 18, 8));   // tyres
+  ctx.fillStyle = body; ctx.beginPath(); ctx.moveTo(-52, -9); ctx.lineTo(10, -13); ctx.lineTo(50, -4); ctx.lineTo(56, 0); ctx.lineTo(50, 4); ctx.lineTo(10, 13); ctx.lineTo(-52, 9); ctx.closePath(); ctx.fill();
+  ctx.fillRect(-58, -18, 9, 36); ctx.fillRect(50, -17, 7, 34);   // rear and front wings
+  ctx.fillStyle = "#16202B"; ctx.beginPath(); ctx.ellipse(-4, 0, 11, 6, 0, 0, 7); ctx.fill();   // cockpit
+  ctx.fillStyle = "#fff"; ctx.font = "bold 13px " + F; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(num, -28, 1); ctx.textBaseline = "alphabetic";
+  ctx.restore(); }
+function streaks(ctx, x, y, rel){ if (Math.abs(rel) < 3) return; const n = Math.min(1, Math.abs(rel) / 310), dir = rel > 0 ? -1 : 1;
+  ctx.strokeStyle = "rgba(255,255,255," + (.25 + .5 * n) + ")"; ctx.lineWidth = 2;
+  [-12, 0, 12].forEach((dy, i) => { const x0 = x + dir * (62 + i * 6); ctx.beginPath(); ctx.moveTo(x0, y + dy); ctx.lineTo(x0 + dir * (20 + 70 * n), y + dy); ctx.stroke(); }); }
+function ground1(ctx, camX){
+  ctx.fillStyle = "#9AA3AC"; ctx.fillRect(0, 0, W1, 70);       // pit lane
+  ctx.fillStyle = C.road; ctx.fillRect(0, 70, W1, 230);        // track
+  ctx.fillStyle = C.grass; ctx.fillRect(0, 300, W1, 80);
+  const o = mod(camX, 600);
+  for (const base of [-o, 600 - o]) {
+    for (let i = 0; i < 600; i += 40) { ctx.fillStyle = (i / 40) % 2 ? "#D93A3A" : "#FFFFFF"; ctx.fillRect(base + i, 292, 40, 10); }   // kerb
+    ctx.fillStyle = "#DADDE0"; ctx.fillRect(base, 62, 600, 8);                                                                      // pit wall
+    for (let i = 0; i < 600; i += 200) { ctx.fillStyle = "#F4F6F8"; ctx.fillRect(base + i + 60, 64, 70, 5); }
+    for (let i = 0; i < 600; i += 60) { ctx.fillStyle = "rgba(255,255,255,.55)"; ctx.fillRect(base + i, 183, 30, 4); }             // lane dashes
+    for (let i = 0; i < 600; i += 150) treeTop(ctx, base + i + 70, 345, 22);
+    for (let i = 0; i < 600; i += 100) { ctx.fillStyle = ["#F08C00", "#1C7ED6", "#2F9E44"][(i / 100) % 3]; ctx.beginPath(); ctx.arc(base + i + 40, 36, 9, 0, 7); ctx.fill(); }   // pit crew
+  } }
+function draw1(t){
+  const dt = last1 ? Math.min(.05, (t - last1) / 1000) : 0; last1 = t;
+  const v1 = 310, v2 = +$("s1").value, view = view1();
+  s1 += v1 * K1 * dt; d1 += (v2 - v1) * K1 * dt; d1 = mod(d1 + 380, 760) - 380;
+  const y1 = 130, y2 = 238, home = 230;
+  let camX, sx1, sx2;
+  if (view === "pit") { camX = 0; sx1 = mod(s1, W1 + 160) - 80; sx2 = mod(s1 + d1, W1 + 160) - 80; }
+  else if (view === "car1") { camX = s1 - home; sx1 = home; sx2 = home + d1; }
+  else { camX = s1 + d1 - home; sx2 = home; sx1 = home - d1; }
+  ground1(x1, camX);
+  const vObs = view === "pit" ? 0 : view === "car1" ? v1 : v2;
+  streaks(x1, sx1, y1, v1 - vObs); streaks(x1, sx2, y2, v2 - vObs);
+  f1car(x1, sx1, y1, "#E8590C", "1"); f1car(x1, sx2, y2, "#1C7ED6", "2");
+  if (view === "pit") { ring(x1, 340, 36, 16); label(x1, "You (pit crew)", 340, 24, C.accent, 13); }
+  else if (view === "car1") { ring(x1, sx1, y1, 64); label(x1, "You", sx1, y1 - 34 + 0, C.accent, 14); }
+  else { x1.fillStyle = "#16202B"; x1.fillRect(sx2 - 52, y2 - 5, 12, 10); ring(x1, sx2, y2, 64); label(x1, "Camera", sx2, y2 + 56, C.accent, 14); }
+  const who = view === "pit" ? "the pit crew" : view === "car1" ? "the driver of Car 1" : "the camera on Car 2";
+  $("h1").textContent = "Compared with " + who + "…";
+  const rows = [["Car 1", v1 - vObs, view === "car1"], ["Car 2", v2 - vObs, view === "car2"], ["Pit wall, trees, track", 0 - vObs, view === "pit"]];
+  const html = rows.map(([n, rel, self]) => "<tr><td>" + n + (self ? (view === "pit" ? " (where you stand)" : view === "car2" ? " (the camera)" : " (you)") : "") + "</td><td>" + (rel === 0 ? "<span class=st>not moving</span>" : "<span class=mv>moving " + (rel > 0 ? "forward" : "backward") + "</span>, " + Math.abs(rel) + " km/h") + "</td></tr>").join("");
+  if ($("tb1").innerHTML !== html) $("tb1").innerHTML = html;
+  $("r1").textContent = "Car 2: " + v2 + " km/h (" + mph(v2) + " mph) compared with the track";
+  const rel21 = v2 - v1;
+  const st = view === "pit" ? "From the pit wall, both cars zoom past: Car 1 at 310 km/h and Car 2 at " + v2 + " km/h. The pit crew uses the ground as the reference point."
+    : view === "car1" ? (rel21 === 0 ? "From Car 1's cockpit, Car 2 seems to hold still right beside you, while the pit wall and trees rush backward. Compared with Car 1, Car 2 is not moving." : "Car 2 is going " + v2 + " km/h compared with the track, but compared with you it only creeps " + (rel21 > 0 ? "ahead" : "back") + " at " + Math.abs(rel21) + " km/h. That is relative motion.")
+    : (rel21 === 0 ? "From the camera on Car 2, Car 1 seems to hold still beside it, while the track rushes backward. Compared with Car 2, Car 1 is not moving." : "Compared with Car 2, Car 1 drifts " + (rel21 > 0 ? "back" : "ahead") + " at only " + Math.abs(rel21) + " km/h, even though it is going 310 km/h compared with the track.");
+  if ($("st1").textContent !== st) $("st1").textContent = st;
+}
+
+// ---------- 2. The school bus window (side view) ----------
+const c2 = $("c2"), x2 = c2.getContext("2d"), PX = 20;   // 20 px = 1 m
+const where2 = seg("w2"), ref2 = seg("ref2");
+let t2 = 0, last2 = 0, run2 = true;
+$("p2").addEventListener("click", () => { run2 = !run2; $("p2").textContent = run2 ? "Pause" : "Play"; });
+$("b2").addEventListener("click", () => { t2 = 0; });
+const TREES2 = [-460, -140, 180, 520, 860, 1200, 1540, 1880, 2220], TREE2 = 520, SIGN2 = 330, STOP2 = 290;   // world x of things beside the road
+function bus(ctx, x, base, wave){   // x = rear of the bus; 240 px long
+  ctx.fillStyle = "#F2B705"; ctx.beginPath(); ctx.roundRect(x, base - 112, 240, 92, 10); ctx.fill();
+  ctx.fillStyle = "#1B1B1B"; ctx.fillRect(x, base - 52, 240, 5);
+  for (let i = 0; i < 5; i++) { ctx.fillStyle = "#BFE0F2"; ctx.fillRect(x + 14 + i * 40, base - 100, 32, 34); }
+  ctx.fillStyle = "#BFE0F2"; ctx.fillRect(x + 214, base - 100, 20, 40);   // windshield (front at the right)
+  // seat backs and riders in windows 3 and 4 (window 4: the rider, window 3: the friend)
+  [[2, "#6C4A2B", "friend"], [3, "#3B2A1E", "rider"]].forEach(([i, hair]) => { const cx = x + 30 + i * 40; ctx.fillStyle = "#F1C9A5"; ctx.beginPath(); ctx.arc(cx, base - 80, 9, 0, 7); ctx.fill(); ctx.fillStyle = hair; ctx.beginPath(); ctx.arc(cx, base - 84, 9, Math.PI, 0); ctx.fill(); });
+  for (let i = 0; i < 5; i++) { ctx.fillStyle = "#2F5D8A"; ctx.fillRect(x + 40 + i * 40, base - 82, 6, 16); }   // seat backs (in front of each rider)
+  ctx.fillStyle = "#1B1B1B"; [44, 190].forEach(w => { ctx.beginPath(); ctx.arc(x + w, base - 18, 17, 0, 7); ctx.fill(); ctx.fillStyle = "#9AA3AC"; ctx.beginPath(); ctx.arc(x + w, base - 18, 7, 0, 7); ctx.fill(); ctx.fillStyle = "#1B1B1B"; });
+  ctx.fillStyle = "#1B1B1B"; ctx.font = "bold 12px " + F; ctx.textAlign = "center"; ctx.fillText("SCHOOL BUS", x + 120, base - 30); }
+function person(ctx, x, base, shirt){ ctx.fillStyle = "#2B3A4A"; ctx.fillRect(x - 6, base - 28, 5, 28); ctx.fillRect(x + 1, base - 28, 5, 28); ctx.fillStyle = shirt; ctx.fillRect(x - 9, base - 56, 18, 30); ctx.fillStyle = "#F1C9A5"; ctx.beginPath(); ctx.arc(x, base - 64, 9, 0, 7); ctx.fill(); }
+function draw2(t){
+  const dt = last2 ? Math.min(.05, (t - last2) / 1000) : 0; last2 = t;
+  const v = +$("s2").value, ms = v / 3.6; $("l2").textContent = "Bus speed: " + v + " km/h (" + mph(v) + " mph)";
+  if (run2) { t2 += dt; if (t2 > 7) t2 = 0; }
+  const busX = -260 + ms * PX * t2 * .55;        // world x of the bus's rear (shown a little slower than real time)
+  const inside = where2() === "in", camX = inside ? busX - 180 : 0;
+  const base = 300, X = (wx) => wx - camX;
+  x2.fillStyle = C.sky; x2.fillRect(0, 0, 600, 360);
+  // far buildings (scroll with the ground)
+  for (let i = -2; i < 12; i++) { const bx = X(i * 170) ; if (bx < -160 || bx > 640) continue; x2.fillStyle = ["#B9C7D3", "#AEBBC8", "#C5D1DB"][mod(i, 3)]; x2.fillRect(bx, 120 - (mod(i * 37, 50)), 120, 140); }
+  x2.fillStyle = "#D7DCE0"; x2.fillRect(0, 238, 600, 22);        // sidewalk
+  x2.fillStyle = C.road; x2.fillRect(0, 260, 600, 60); x2.fillStyle = C.grass2; x2.fillRect(0, 320, 600, 40);
+  for (let i = -20; i < 60; i++) { const lx = X(i * 80); if (lx > -50 && lx < 650) { x2.fillStyle = "rgba(255,255,255,.7)"; x2.fillRect(lx, 312, 40, 4); } }
+  TREES2.forEach(w => { const tx = X(w); if (tx > -60 && tx < 660) treeSide(x2, tx, 246, w === TREE2 ? 120 : 100); });
+  const sx = X(SIGN2); x2.fillStyle = "#6B7682"; x2.fillRect(sx - 2, 170, 4, 76); x2.fillStyle = C.blue; x2.beginPath(); x2.roundRect(sx - 18, 158, 36, 26, 4); x2.fill(); x2.fillStyle = "#fff"; x2.font = "bold 11px " + F; x2.textAlign = "center"; x2.fillText("BUS", sx, 175);
+  const px = X(STOP2); person(x2, px, 248, "#E8590C");
+  bus(x2, X(busX), base + 20);
+  // reference point and the rider
+  const riderW = busX + 150, refName = ref2();
+  const refW = {friend: busX + 110, seat: busX + 160, tree: TREE2, sign: SIGN2}[refName];
+  const refY = {friend: 238, seat: 240, tree: 160, sign: 170}[refName];
+  const rx = X(riderW), fx = X(refW);
+  ring(x2, rx, 240, 16, C.blue); label(x2, inside ? "Rider (you)" : "Rider", rx, 210, C.blue, 13);
+  ring(x2, fx, refY, refName === "tree" ? 42 : 18, C.accent);
+  if (!inside) label(x2, "You", px, 172, C.accent, 13);
+  const dist = Math.abs(riderW - refW) / PX;
+  const moving = v > 0 && (refName === "tree" || refName === "sign");
+  x2.strokeStyle = C.accent; x2.lineWidth = 2; x2.setLineDash([5, 4]); x2.beginPath(); x2.moveTo(Math.max(-5, Math.min(605, rx)), 232); x2.lineTo(Math.max(-5, Math.min(605, fx)), 232); x2.stroke(); x2.setLineDash([]);
+  const refLabel = {friend: "the friend", seat: "the seat in front", tree: "the tree", sign: "the bus stop sign"}[refName];
+  $("r2").textContent = "Rider to " + refLabel + ": " + dist.toFixed(1) + " m";
+  const st = (v === 0 ? "The bus is stopped, so the rider is not moving compared with anything here. "
+      : moving ? "Compared with " + refLabel + ", the rider is moving at " + v + " km/h: the distance keeps changing. "
+      : "Compared with " + refLabel + ", the rider is not moving: the distance stays the same, even though the bus is going " + v + " km/h. ")
+    + (v === 0 ? "" : inside ? "From your seat, the bus seems still and the trees and sign slide backward." : "From the bus stop, the bus and everyone on it roll past you.");
+  if ($("st2").textContent !== st) $("st2").textContent = st;
+}
+
+// ---------- 3. Choose a reference point (side view) ----------
+const c3 = $("c3"), x3 = c3.getContext("2d"), ref3 = seg("ref3");
+let run3 = false, last3 = 0;
+$("p3").addEventListener("click", () => { if (+$("s3").value >= 600) $("s3").value = 0; run3 = !run3; $("p3").textContent = run3 ? "Pause" : "Play"; });
+const HOUSE = [30, 190], TREE3 = 300;
+const ease = (u) => u < 0 ? 0 : u > 1 ? 1 : u * u * (3 - 2 * u);
+const carX = (u) => 200 + 420 * ease((u - .08) / .92);     // driver's position (world px); the car waits a moment, then pulls away
+const truckX = (u) => 680 - 820 * u;
+function car3(ctx, x, base){   // x = driver's head
+  ctx.fillStyle = "#1C7ED6"; ctx.beginPath(); ctx.roundRect(x - 62, base - 40, 110, 24, 8); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(x - 40, base - 40); ctx.lineTo(x - 26, base - 62); ctx.lineTo(x + 14, base - 62); ctx.lineTo(x + 30, base - 40); ctx.fill();
+  ctx.fillStyle = "#BFE0F2"; ctx.beginPath(); ctx.moveTo(x - 34, base - 42); ctx.lineTo(x - 24, base - 58); ctx.lineTo(x + 12, base - 58); ctx.lineTo(x + 24, base - 42); ctx.fill();
+  [[x + 2, "#3B2A1E"], [x - 22, "#B5651D"]].forEach(([hx, hair]) => { ctx.fillStyle = "#F1C9A5"; ctx.beginPath(); ctx.arc(hx, base - 49, 6, 0, 7); ctx.fill(); ctx.fillStyle = hair; ctx.beginPath(); ctx.arc(hx, base - 52, 6, Math.PI, 0); ctx.fill(); });
+  ctx.fillStyle = "#1B1B1B"; [x - 40, x + 28].forEach(w => { ctx.beginPath(); ctx.arc(w, base - 14, 11, 0, 7); ctx.fill(); }); }
+function truck(ctx, x, base){
+  ctx.fillStyle = "#8D6E63"; ctx.fillRect(x - 10, base - 66, 110, 50); ctx.fillStyle = "#C62828"; ctx.beginPath(); ctx.roundRect(x - 52, base - 56, 44, 40, 6); ctx.fill();
+  ctx.fillStyle = "#BFE0F2"; ctx.fillRect(x - 46, base - 50, 18, 16);
+  ctx.fillStyle = "#1B1B1B"; [x - 34, x + 30, x + 80].forEach(w => { ctx.beginPath(); ctx.arc(w, base - 12, 11, 0, 7); ctx.fill(); }); }
+function draw3(t){
+  const dt = last3 ? Math.min(.05, (t - last3) / 1000) : 0; last3 = t;
+  if (run3) { const nv = Math.min(600, +$("s3").value + dt * 85); $("s3").value = nv; if (nv >= 600) { run3 = false; $("p3").textContent = "Play"; } }
+  const u = +$("s3").value / 600, cx = carX(u), tx = truckX(u), refName = ref3();
+  x3.fillStyle = C.sky; x3.fillRect(0, 0, 600, 360);
+  x3.fillStyle = C.grass; x3.fillRect(0, 230, 600, 40);
+  x3.fillStyle = "#A9AFB5"; x3.fillRect(150, 230, 90, 40);                                   // driveway
+  x3.fillStyle = "#7C858F"; x3.fillRect(0, 270, 600, 34); x3.fillStyle = C.road; x3.fillRect(0, 304, 600, 56);   // near lane (car), far lane drawn darker
+  for (let i = 0; i < 600; i += 70) { x3.fillStyle = "rgba(255,255,255,.75)"; x3.fillRect(i, 302, 36, 3); }
+  // house
+  x3.fillStyle = "#E9D8C4"; x3.fillRect(HOUSE[0], 140, HOUSE[1] - HOUSE[0], 92); x3.fillStyle = "#B4483C"; x3.beginPath(); x3.moveTo(HOUSE[0] - 12, 142); x3.lineTo((HOUSE[0] + HOUSE[1]) / 2, 88); x3.lineTo(HOUSE[1] + 12, 142); x3.fill();
+  x3.fillStyle = "#6D4C41"; x3.fillRect(60, 186, 26, 46); x3.fillStyle = "#BFE0F2"; x3.fillRect(110, 162, 46, 30);
+  treeSide(x3, TREE3, 240, 130);
+  // the truck drives the other way in the far lane; the car pulls out of the driveway into the near lane
+  truck(x3, tx, 300);
+  const base = u < .08 ? 268 : 268 + Math.min(1, (u - .08) / .25) * 70;   // drops from the driveway onto the road
+  car3(x3, cx, Math.min(338, base));
+  const refX = {house: HOUSE[1], tree: TREE3, pass: cx - 22, truck: tx}[refName];
+  const refY = {house: 180, tree: 150, pass: Math.min(338, base) - 49, truck: 260}[refName];
+  const dY = Math.min(338, base) - 49;
+  ring(x3, cx + 2, dY, 13, C.blue); label(x3, "You (driver)", cx + 2, dY - 22, C.blue, 13);
+  if (refName !== "pass") ring(x3, refX, refY, refName === "tree" ? 48 : refName === "house" ? 30 : 34, C.accent);
+  else ring(x3, refX, refY, 10, C.accent);
+  if (refName !== "pass") { x3.strokeStyle = C.accent; x3.lineWidth = 2; x3.setLineDash([5, 4]); x3.beginPath(); x3.moveTo(cx + 2, dY); x3.lineTo(refX, refY); x3.stroke(); x3.setLineDash([]); }
+  const PX3 = 15;   // 15 px = 1 m
+  const dist = (uu) => { const c = carX(uu), r = {house: HOUSE[1], tree: TREE3, pass: c - 22, truck: truckX(uu)}[refName]; return Math.abs(c - r) / PX3; };
+  const d = dist(u), dd = dist(Math.min(1, u + .01)) - d, changing = Math.abs(dd) > .01;
+  const name = {house: "the house", tree: "the tree", pass: "your passenger", truck: "the truck"}[refName];
+  $("r3").textContent = "You to " + name + ": " + d.toFixed(1) + " m " + (changing ? (dd > 0 ? "(growing)" : "(shrinking)") : "(not changing)");
+  let st;
+  if (refName === "pass") st = "Your passenger rides with you, so the distance never changes. Compared with your passenger, you are not moving, even while the car drives away.";
+  else if (refName === "truck") st = u < .08 ? "The car hasn't moved yet, but the distance to the truck is already changing, because the truck is moving. A moving reference point makes it hard to tell who moved." : "The distance to the truck changes, but the truck is moving too, so you can't tell how much of the change is you. That is why a moving object is a poor reference point.";
+  else st = !changing && u < .1 ? "Parked in the driveway: the distance to " + name + " is not changing, so you are not moving compared with it." : u >= 1 ? "You are " + d.toFixed(0) + " m from " + name + " and still on your way. The distance changed, so your position changed: you moved." : "The distance to " + name + " keeps changing, and " + name + " stays put. Your position is changing, so you are moving. Things that stay put, like trees and buildings, make the best reference points.";
+  if ($("st3").textContent !== st) $("st3").textContent = st;
+}
+function loop(t){ if (active === "t1") draw1(t); else last1 = 0; if (active === "t2") draw2(t); else last2 = 0; if (active === "t3") draw3(t); else last3 = 0; requestAnimationFrame(loop); }
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
